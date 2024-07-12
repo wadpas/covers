@@ -5,14 +5,17 @@ const express = require('express')
 const app = express()
 const tasks = require('./routes/tasks')
 const products = require('./routes/products')
+const main = require('./routes/main')
 const connectDB = require('./db/connect')
 const notFound = require('./middleware/not-found')
 const errorHandler = require('./middleware/error-handler')
 const port = process.env.PORT || 3000
 
+app.use(express.static('./public'))
 app.use(express.json())
 app.use('/api/v1/tasks', tasks)
 app.use('/api/v1/products', products)
+app.use('/api/v1', main)
 app.use(notFound)
 app.use(errorHandler)
 
