@@ -1,4 +1,4 @@
-const Task = require('../models/task')
+const Task = require('../models/Task')
 const { CustomApiError } = require('../errors/custom-error')
 
 const getAllTasks = async (req, res) => {

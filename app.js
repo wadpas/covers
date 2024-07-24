@@ -3,9 +3,12 @@ require('express-async-errors')
 
 const express = require('express')
 const app = express()
-const tasks = require('./routes/tasks')
-const products = require('./routes/products')
-const main = require('./routes/main')
+
+const tasksRouter = require('./routes/tasks')
+const productsRouter = require('./routes/products')
+const authRouter = require('./routes/auth')
+const jobsRouter = require('./routes/jobs')
+
 const connectDB = require('./db/connect')
 const notFound = require('./middleware/not-found')
 const errorHandler = require('./middleware/error-handler')
@@ -13,9 +16,12 @@ const port = process.env.PORT || 3000
 
 app.use(express.static('./public'))
 app.use(express.json())
-app.use('/api/v1/tasks', tasks)
-app.use('/api/v1/products', products)
-app.use('/api/v1', main)
+
+app.use('/api/v1/tasks', tasksRouter)
+app.use('/api/v1/products', productsRouter)
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/jobs', jobsRouter)
+
 app.use(notFound)
 app.use(errorHandler)
 
