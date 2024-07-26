@@ -1,4 +1,5 @@
 const Task = require('../models/Task')
+const { StatusCodes } = require('http-status-codes')
 const { CustomApiError } = require('../errors/custom-error')
 
 const getAllTasks = async (req, res) => {
@@ -8,7 +9,7 @@ const getAllTasks = async (req, res) => {
 
 const createTask = async (req, res) => {
 	const task = await Task.create(req.body)
-	res.status(201).json({ task })
+	res.status(StatusCodes.CREATED).json({ task })
 }
 
 const getTask = async (req, res, next) => {
