@@ -1,42 +1,59 @@
 const Task = require('../models/Task')
 const { StatusCodes } = require('http-status-codes')
-const { CustomApiError } = require('../errors/custom-error')
+const { BadRequestError, NotFoundError } = require('../errors')
 
 const getAllTasks = async (req, res) => {
-	const tasks = await Task.find({})
-	res.status(200).json({ tasks })
+	const tasks = await Task.find({ createdBy: req.user.userId }).sort('createdAt')
+	res.status(StatusCodes.OK).json({ tasks, count: tasks.length })
+}
+
+const getTask = async (req, res, next) => {
+	const {
+		user: { userId },
+		params: { id: taskId },
+	} = req
+	const task = await Task.findById({ _id: taskId, createdBy: userId })
+	if (!task) {
+		throw new NotFoundError(`No task with id ${taskId}`)
+	}
+	res.status(StatusCodes.OK).json({ task })
 }
 
 const createTask = async (req, res) => {
+	req.body.createdBy = req.user.userId
 	const task = await Task.create(req.body)
 	res.status(StatusCodes.CREATED).json({ task })
 }
 
-const getTask = async (req, res, next) => {
-	const { id: TaskID } = req.params
-	const task = await Task.findById({ _id: TaskID })
-	if (!task) {
-		return next(new CustomApiError(`No task with id : ${TaskID}`, 404))
-	}
-	res.status(200).json({ task })
-}
-
 const updateTask = async (req, res) => {
-	const { id: TaskID } = req.params
-	const task = await Task.findOneAndUpdate({ _id: TaskID }, req.body, { new: true, runValidation: true })
-	if (!task) {
-		return next(new CustomApiError(`No task with id : ${TaskID}`, 404))
+	const {
+		body: { name },
+		user: { userId },
+		params: { id: taskId },
+	} = req
+	if (name === '' || name === null) {
+		throw new BadRequestError('Name field cannot be empty')
 	}
-	res.status(200).json({ task })
+	const task = await Task.findOneAndUpdate({ _id: taskId, createdBy: userId }, req.body, {
+		new: true,
+		runValidation: true,
+	})
+	if (!task) {
+		throw new NotFoundError(`No task with id ${taskId}`)
+	}
+	res.status(StatusCodes.OK).json({ task })
 }
 
 const deleteTask = async (req, res) => {
-	const { id: TaskID } = req.params
-	const task = await Task.findOneAndDelete({ _id: TaskID })
+	const {
+		user: { userId },
+		params: { id: taskId },
+	} = req
+	const task = await Task.findByIdAndRemove({ _id: taskId, createdBy: userId })
 	if (!task) {
-		return next(new CustomApiError(`No task with id : ${TaskID}`, 404))
+		throw new NotFoundError(`No job with id ${taskId}`)
 	}
-	res.status(200).json({ task })
+	res.status(StatusCodes.OK).send()
 }
 
 module.exports = {

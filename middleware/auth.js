@@ -12,7 +12,6 @@ const auth = async (req, res, next) => {
 	try {
 		const payload = jwt.verify(token, process.env.JWT_SECRET)
 		req.user = { userId: payload.userId }
-		console.log(payload.userId)
 	} catch (err) {
 		throw new UnauthenticatedError('Not authorized to access this route')
 	}
