@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const UserSchema = mongoose.Schema({
 	name: {
@@ -21,8 +21,20 @@ const UserSchema = mongoose.Schema({
 	},
 	password: {
 		type: String,
-		required: [true, 'User name is required'],
-		mixLength: [6, 'User password should be at least 6 characters'],
+		required: [true, 'Password is required'],
+		mixLength: [6, 'Password should be at least 6 characters'],
+		trim: true,
+	},
+	lastName: {
+		type: String,
+		default: 'lastName',
+		maxLength: [20, 'Last name can not exceed more than 20 characters'],
+		trim: true,
+	},
+	location: {
+		type: String,
+		default: 'my city',
+		maxLength: [20, 'Location can not exceed more than 20 characters'],
 		trim: true,
 	},
 })

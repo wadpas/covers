@@ -15,7 +15,6 @@ const auth = async (req, res, next) => {
 	} catch (err) {
 		throw new UnauthenticatedError('Not authorized to access this route')
 	}
-
 	next()
 }
 
