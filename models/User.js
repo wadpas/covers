@@ -37,11 +37,29 @@ const UserSchema = mongoose.Schema({
 		maxLength: [20, 'Location can not exceed more than 20 characters'],
 		trim: true,
 	},
+	jobType: {
+		type: String,
+		enum: ['full-time', 'part-time', 'remote', 'internship'],
+		default: 'full-time',
+	},
+	jobLocation: {
+		type: String,
+		default: 'berlin',
+		maxLength: [20, 'Location can not exceed more than 20 characters'],
+		trim: true,
+		require: true,
+	},
+	role: {
+		type: String,
+		enum: ['user', 'admin'],
+		default: 'user',
+	},
 })
 
-UserSchema.pre('save', function (next) {
-	this.password = bcrypt.hashSync(this.password, 10)
-	next()
+UserSchema.pre('save', async function () {
+	if (!this.isModified('password')) return
+	const salt = await bcrypt.genSalt(10)
+	this.password = await bcrypt.hash(this.password, salt)
 })
 
 UserSchema.methods.createJWT = function () {

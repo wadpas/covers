@@ -11,11 +11,12 @@ const auth = async (req, res, next) => {
 
 	try {
 		const payload = jwt.verify(token, process.env.JWT_SECRET)
-		req.user = { userId: payload.userId }
+		const testUser = payload.userId === '66c0d640e6a51a6278568d6d'
+		req.user = { userId: payload.userId, testUser }
+		next()
 	} catch (err) {
 		throw new UnauthenticatedError('Not authorized to access this route')
 	}
-	next()
 }
 
 module.exports = auth
