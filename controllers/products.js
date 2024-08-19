@@ -1,3 +1,4 @@
+const { StatusCodes } = require('http-status-codes')
 const Product = require('../models/Product')
 
 const getAllProductsStatic = async (req, res) => {
@@ -60,7 +61,13 @@ const getAllProducts = async (req, res) => {
 	res.status(200).json({ products })
 }
 
+const createProduct = async (req, res) => {
+	const product = await Product.create(req.body)
+	res.status(StatusCodes.CREATED).json({ product })
+}
+
 module.exports = {
 	getAllProductsStatic,
 	getAllProducts,
+	createProduct,
 }

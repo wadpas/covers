@@ -20,6 +20,10 @@ const ProductSchema = mongoose.Schema({
 		type: Date,
 		default: Date.now(),
 	},
+	image: {
+		type: String,
+		required: true,
+	},
 	company: {
 		type: String,
 		enum: {
