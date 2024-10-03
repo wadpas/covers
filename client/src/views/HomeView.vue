@@ -3,5 +3,5 @@
 </script>
 
 <template>
-	<Button>Click me</Button>
+	<Button variant="secondary">Click me</Button>
 </template>
