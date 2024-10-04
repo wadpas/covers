@@ -3,11 +3,11 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const UserSchema = mongoose.Schema({
-	name: {
+	username: {
 		type: String,
-		required: [true, 'User name is required'],
-		mixLength: [3, 'User name should be at least 3 characters'],
-		maxLength: [20, 'User name can not exceed more than 20 characters'],
+		required: [true, 'Username is required'],
+		mixLength: [3, 'Username should be at least 3 characters'],
+		maxLength: [20, 'Username can not exceed more than 20 characters'],
 		trim: true,
 	},
 	email: {
@@ -25,29 +25,23 @@ const UserSchema = mongoose.Schema({
 		mixLength: [6, 'Password should be at least 6 characters'],
 		trim: true,
 	},
+	firstName: {
+		type: String,
+		default: '',
+		maxLength: [20, 'Last name can not exceed more than 20 characters'],
+		trim: true,
+	},
 	lastName: {
 		type: String,
-		default: 'lastName',
+		default: '',
 		maxLength: [20, 'Last name can not exceed more than 20 characters'],
 		trim: true,
 	},
 	location: {
 		type: String,
-		default: 'my city',
+		default: '',
 		maxLength: [20, 'Location can not exceed more than 20 characters'],
 		trim: true,
-	},
-	jobType: {
-		type: String,
-		enum: ['full-time', 'part-time', 'remote', 'internship'],
-		default: 'full-time',
-	},
-	jobLocation: {
-		type: String,
-		default: 'berlin',
-		maxLength: [20, 'Location can not exceed more than 20 characters'],
-		trim: true,
-		require: true,
 	},
 	role: {
 		type: String,

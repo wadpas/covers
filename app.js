@@ -26,8 +26,7 @@ const authMid = require('./middleware/auth')
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(express.static(path.resolve(__dirname, './client/build')))
-app.use(express.static('./public'))
+app.use(express.static(path.resolve(__dirname, './public')))
 app.use(express.json())
 app.use(fileUpload({ useTempFiles: true }))
 app.use(helmet())
@@ -37,7 +36,7 @@ app.use('/api/v1/tasks', authMid, tasksRouter)
 app.use('/api/v1/products', authMid, productsRouter)
 app.use('/api/v1/jobs', authMid, jobsRouter)
 app.get('*', (req, res) => {
-	res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+	res.sendFile(path.resolve(__dirname, './public', 'index.html'))
 })
 app.use(notFound)
 app.use(errorHandler)
