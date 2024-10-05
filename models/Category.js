@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const TaskSchema = mongoose.Schema(
+const CategorySchema = mongoose.Schema(
 	{
 		name: {
 			type: String,
@@ -7,11 +7,7 @@ const TaskSchema = mongoose.Schema(
 			trim: true,
 			maxLength: [30, 'name can not exceed more than 30 characters'],
 		},
-		completed: {
-			type: Boolean,
-			default: false,
-		},
-		createdBy: {
+		owner: {
 			type: mongoose.Types.ObjectId,
 			ref: 'User',
 			required: [true, 'Please provide userId'],
@@ -19,4 +15,4 @@ const TaskSchema = mongoose.Schema(
 	},
 	{ timestamps: true }
 )
-module.exports = mongoose.model('Task', TaskSchema)
+module.exports = mongoose.model('Category', CategorySchema)

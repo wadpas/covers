@@ -14,7 +14,7 @@ cloudinary.config({
 	api_secret: process.env.CLOUD_API_SECRET,
 })
 
-const tasksRouter = require('./routes/tasks')
+const categoriesRouter = require('./routes/categories')
 const productsRouter = require('./routes/products')
 const authRouter = require('./routes/auth')
 const jobsRouter = require('./routes/jobs')
@@ -32,7 +32,7 @@ app.use(fileUpload({ useTempFiles: true }))
 app.use(helmet())
 app.use(cors())
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/tasks', authMid, tasksRouter)
+app.use('/api/v1/categories', authMid, categoriesRouter)
 app.use('/api/v1/products', authMid, productsRouter)
 app.use('/api/v1/jobs', authMid, jobsRouter)
 app.get('*', (req, res) => {

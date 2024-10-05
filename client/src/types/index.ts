@@ -1,9 +1,3 @@
-export interface APIResponse<T> {
-	data: T
-	message: string
-	token: string
-}
-
 export type Image = {
 	localPath: string
 	url: string
@@ -20,4 +14,12 @@ export type User = {
 	location: string
 	createdAt: string
 	role: string
+}
+
+export type Category = {
+	_id: string
+	name: string
+	owner: string
+	createdAt: string
+	updatedAt: string
 }
