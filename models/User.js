@@ -2,53 +2,57 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const UserSchema = mongoose.Schema({
-	username: {
-		type: String,
-		required: [true, 'Username is required'],
-		mixLength: [3, 'Username should be at least 3 characters'],
-		maxLength: [20, 'Username can not exceed more than 20 characters'],
-		trim: true,
+const UserSchema = mongoose.Schema(
+	{
+		username: {
+			type: String,
+			required: [true, 'Username is required'],
+			mixLength: [3, 'Username should be at least 3 characters'],
+			maxLength: [20, 'Username can not exceed more than 20 characters'],
+			trim: true,
+		},
+		email: {
+			type: String,
+			required: [true, 'User email is required'],
+			match: [
+				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+				'Please provide a valid email',
+			],
+			unique: true,
+		},
+		password: {
+			type: String,
+			required: [true, 'Password is required'],
+			mixLength: [6, 'Password should be at least 6 characters'],
+			trim: true,
+		},
+		avatar: {
+			localPath: { type: String },
+			url: { type: String },
+		},
+		firstName: {
+			type: String,
+			maxLength: [20, 'Last name can not exceed more than 20 characters'],
+			trim: true,
+		},
+		lastName: {
+			type: String,
+			maxLength: [20, 'Last name can not exceed more than 20 characters'],
+			trim: true,
+		},
+		location: {
+			type: String,
+			maxLength: [20, 'Location can not exceed more than 20 characters'],
+			trim: true,
+		},
+		role: {
+			type: String,
+			enum: ['user', 'admin'],
+			default: 'user',
+		},
 	},
-	email: {
-		type: String,
-		required: [true, 'User email is required'],
-		match: [
-			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-			'Please provide a valid email',
-		],
-		unique: true,
-	},
-	password: {
-		type: String,
-		required: [true, 'Password is required'],
-		mixLength: [6, 'Password should be at least 6 characters'],
-		trim: true,
-	},
-	firstName: {
-		type: String,
-		default: '',
-		maxLength: [20, 'Last name can not exceed more than 20 characters'],
-		trim: true,
-	},
-	lastName: {
-		type: String,
-		default: '',
-		maxLength: [20, 'Last name can not exceed more than 20 characters'],
-		trim: true,
-	},
-	location: {
-		type: String,
-		default: '',
-		maxLength: [20, 'Location can not exceed more than 20 characters'],
-		trim: true,
-	},
-	role: {
-		type: String,
-		enum: ['user', 'admin'],
-		default: 'user',
-	},
-})
+	{ timestamps: true }
+)
 
 UserSchema.pre('save', async function () {
 	if (!this.isModified('password')) return

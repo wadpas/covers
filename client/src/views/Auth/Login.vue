@@ -5,18 +5,15 @@
 	import { Button } from '@/components/ui/button'
 	import { Input } from '@/components/ui/input'
 	import { Label } from '@/components/ui/label'
-	// import { useAuthStore } from '@/stores/authStore'
+	import { useAuthStore } from '@/stores/authStore'
 
 	type PAYLOAD = {
+		email: string
 		password: string
-		username: string
 	}
-	const form = ref<PAYLOAD>({
-		password: 'password',
-		username: 'hafiz',
-	})
+	const form = ref<PAYLOAD>({})
 	const router = useRouter()
-	// const store = useAuthStore()
+	const store = useAuthStore()
 
 	const onSubmit = async () => {
 		try {
@@ -40,12 +37,12 @@
 					</CardHeader>
 					<CardContent class="grid gap-4">
 						<div class="grid gap-2">
-							<Label for="username">Username</Label>
+							<Label for="email">Email</Label>
 							<Input
-								id="username"
+								id="email"
 								type="text"
-								placeholder="username"
-								v-model="form.username" />
+								placeholder="email"
+								v-model="form.email" />
 						</div>
 						<div class="grid gap-2">
 							<Label for="password">Password</Label>

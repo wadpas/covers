@@ -6,13 +6,9 @@ const register = async (req, res) => {
 	const user = await User.create({ ...req.body })
 	const token = user.createJWT()
 	res.status(StatusCodes.CREATED).json({
-		user: {
-			email: user.email,
-			name: user.name,
-			lastName: user.lastName,
-			location: user.location,
-			token,
-		},
+		user,
+		token,
+		message: 'Register is successful!',
 	})
 }
 
@@ -31,11 +27,9 @@ const login = async (req, res) => {
 	}
 	const token = user.createJWT()
 	res.status(StatusCodes.OK).json({
-		user: {
-			email: user.email,
-			name: user.name,
-			token,
-		},
+		user,
+		token,
+		message: 'Login is successful!',
 	})
 }
 

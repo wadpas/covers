@@ -6,20 +6,16 @@
 	import { Input } from '@/components/ui/input'
 	import { Label } from '@/components/ui/label'
 	import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-	// import { useAuthStore } from '@/stores/authStore'
+	import { useAuthStore } from '@/stores/authStore'
 
 	type PAYLOAD = {
 		email: string
 		password: string
 		username: string
 	}
-	const form = ref<PAYLOAD>({
-		password: 'password',
-		username: 'johndoe',
-		email: 'john.doe@gmail.com',
-	})
+	const form = ref<PAYLOAD>({})
 	const router = useRouter()
-	// const store = useAuthStore()
+	const store = useAuthStore()
 	const onSubmit = async () => {
 		try {
 			await store.registerUser(form.value)
