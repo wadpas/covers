@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const { getAllProductsStatic, getAllProducts } = require('../controllers/products')
-const { uploadProductImage, cloudinaryProductImage } = require('../controllers/upload')
+const { addProducts, getAllProducts } = require('../controllers/products')
+const { uploadProductImage } = require('../controllers/upload')
 
-router.route('/').get(getAllProducts)
-router.route('/uploads').post(cloudinaryProductImage)
+router.route('/').get(getAllProducts).post(addProducts)
+router.route('/uploads').post(uploadProductImage)
 
 module.exports = router

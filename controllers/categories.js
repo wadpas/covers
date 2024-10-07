@@ -4,7 +4,7 @@ const { BadRequestError, NotFoundError } = require('../errors')
 
 const getAllCategories = async (req, res) => {
 	const categories = await Category.find({}).sort('createdAt')
-	res.status(StatusCodes.OK).json({ categories })
+	res.status(StatusCodes.OK).json({ categories, pagination: {} })
 }
 
 const getCategory = async (req, res, next) => {

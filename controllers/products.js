@@ -1,11 +1,6 @@
 const { StatusCodes } = require('http-status-codes')
 const Product = require('../models/Product')
 
-const getAllProductsStatic = async (req, res) => {
-	const products = await Product.find({}).sort('-name')
-	res.status(200).json({ products, nbHists: products.length })
-}
-
 const getAllProducts = async (req, res) => {
 	const { featured, company, name, sort, fields, numericFilters } = req.query
 	const queryObject = {}
@@ -66,8 +61,13 @@ const createProduct = async (req, res) => {
 	res.status(StatusCodes.CREATED).json({ product })
 }
 
+const addProducts = async (req, res) => {
+	const products = await Product.insertMany(req.body)
+	res.status(StatusCodes.CREATED).json({ products })
+}
+
 module.exports = {
-	getAllProductsStatic,
 	getAllProducts,
 	createProduct,
+	addProducts,
 }

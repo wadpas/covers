@@ -8,7 +8,7 @@ axiosInstance.interceptors.request.use((config) => {
 	const token = JSON.parse(localStorage.getItem('token') || '{}')
 	if (token) {
 		config.headers = config.headers || {}
-		const unprotectedURls = ['/users/login/', '/users/register/']
+		const unprotectedURls = ['/auth/login/', '/auth/register/']
 
 		if (config.url && !unprotectedURls.includes(config.url)) {
 			config.headers.Authorization = `Bearer ${token}`

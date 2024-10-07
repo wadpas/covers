@@ -18,6 +18,8 @@
 	const store = useAuthStore()
 	const onSubmit = async () => {
 		try {
+			console.log(form.value)
+
 			await store.registerUser(form.value)
 			router.push('/')
 		} catch (error) {
