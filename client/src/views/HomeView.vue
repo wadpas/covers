@@ -1,16 +1,50 @@
-<script setup lang="ts">
-	import { Button } from '@/components/ui/button'
-	import useProductModal from '@/composable/useProductModal'
-	import ProductModal from '@/components/ProductModal.vue'
-	const { isOpen, onOpen } = useProductModal()
-</script>
+<script setup></script>
 
 <template>
-	<ProductModal v-if="isOpen" />
-	<div class="w-full max-w-4xl mx-auto my-10">
-		<div class="flex items-center justify-between">
-			<h3 class="text-2xl font-bold">All Products</h3>
-			<Button @click="onOpen">Add Product</Button>
+	<form>
+		<div class="mb-3">
+			<label
+				for="exampleInputEmail1"
+				class="form-label">
+				Email address
+			</label>
+			<input
+				type="email"
+				class="form-control"
+				id="exampleInputEmail1"
+				aria-describedby="emailHelp" />
+			<div
+				id="emailHelp"
+				class="form-text">
+				We'll never share your email with anyone else.
+			</div>
 		</div>
-	</div>
+		<div class="mb-3">
+			<label
+				for="exampleInputPassword1"
+				class="form-label">
+				Password
+			</label>
+			<input
+				type="password"
+				class="form-control"
+				id="exampleInputPassword1" />
+		</div>
+		<div class="mb-3 form-check">
+			<input
+				type="checkbox"
+				class="form-check-input"
+				id="exampleCheck1" />
+			<label
+				class="form-check-label"
+				for="exampleCheck1">
+				Check me out
+			</label>
+		</div>
+		<button
+			type="submit"
+			class="btn btn-primary">
+			Submit
+		</button>
+	</form>
 </template>

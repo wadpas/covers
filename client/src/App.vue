@@ -1,13 +1,25 @@
-<script setup lang="ts">
+<script setup>
 	import { RouterLink, RouterView } from 'vue-router'
-	import HelloWorld from './components/HelloWorld.vue'
-	import GlobalLoader from 'vue-global-loader/GlobalLoader.vue'
-	import CircleSpinner from 'vue-global-loader/CircleSpinner.vue'
 </script>
 
 <template>
-	<GlobalLoader>
-		<CircleSpinner />
-	</GlobalLoader>
+	<header>
+		<img
+			alt="Vue logo"
+			class="logo"
+			src="@/assets/logo.svg"
+			width="125"
+			height="125" />
+
+		<div class="wrapper">
+			<HelloWorld msg="You did it!" />
+
+			<nav>
+				<RouterLink to="/">Home</RouterLink>
+				<RouterLink to="/about">About</RouterLink>
+			</nav>
+		</div>
+	</header>
+
 	<RouterView />
 </template>
