@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const ProductSchema = mongoose.Schema(
 	{
-		title: {
+		name: {
 			type: String,
 			maxlength: [100, 'Name cannot be more than 100 characters'],
 			required: [true, 'product name must be provider'],
@@ -19,7 +19,7 @@ const ProductSchema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		image: {
+		imageUrl: {
 			type: String,
 			required: true,
 		},

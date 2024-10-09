@@ -39,8 +39,9 @@
 					id="image" />
 			</div>
 			<button
-				type="submit"
-				class="btn btn-primary">
+				type="button"
+				class="btn btn-primary"
+				@click="addCategory">
 				Submit
 			</button>
 		</form>
@@ -49,12 +50,22 @@
 
 <script setup>
 	import { ref } from 'vue'
-	import axios from 'axios'
+	import axiosInstance from '@/api/axios'
+	import swal from 'sweetalert'
 
 	const formData = {
 		name: '',
 		description: '',
 		imageUrl: '',
+	}
+
+	function addCategory() {
+		axiosInstance.post('/categories', formData).then(
+			swal({
+				text: 'Category added!',
+				icon: 'success',
+			})
+		)
 	}
 </script>
 

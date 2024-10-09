@@ -7,10 +7,13 @@ const CategorySchema = mongoose.Schema(
 			trim: true,
 			maxLength: [30, 'name can not exceed more than 30 characters'],
 		},
-		owner: {
-			type: mongoose.Types.ObjectId,
-			ref: 'User',
-			required: [true, 'Please provide userId'],
+		description: {
+			type: String,
+			required: [true, 'Please provide description'],
+		},
+		imageUrl: {
+			type: String,
+			required: [true, 'Please provide imageUrl'],
 		},
 	},
 	{ timestamps: true }
