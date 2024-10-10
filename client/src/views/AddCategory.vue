@@ -1,5 +1,5 @@
 <template>
-	<h3 class="p-3">Add Category</h3>
+	<h5 class="p-3">Add Category</h5>
 	<div class="p-3 w-50 text-primary-emphasis border border-light rounded-3">
 		<form>
 			<div class="mb-3">
@@ -40,7 +40,7 @@
 			</div>
 			<button
 				type="button"
-				class="btn btn-primary"
+				class="btn btn-dark"
 				@click="addCategory">
 				Submit
 			</button>

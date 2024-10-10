@@ -1,10 +1,8 @@
 <template>
-	<h2 class="mx-3">Categories</h2>
-	<div class="roe"></div>
 	<router-link :to="{ name: 'addCategory' }">
-		<button class="btn btn-light my-3">Add Category</button>
+		<button class="btn btn-light mt-4 mx-3 px-3">Add Category</button>
 	</router-link>
-	<div class="row">
+	<div class="row m-1">
 		<div
 			class="d-flex col-xl-3 col-md-6"
 			v-for="category of categories"
@@ -19,5 +17,3 @@
 	import Category from '@/components/Category.vue'
 	const props = defineProps(['categories'])
 </script>
-
-<style lang="scss" scoped></style>

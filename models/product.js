@@ -6,10 +6,6 @@ const ProductSchema = mongoose.Schema(
 			maxlength: [100, 'Name cannot be more than 100 characters'],
 			required: [true, 'product name must be provider'],
 		},
-		price: {
-			type: Number,
-			required: [true, 'product price must be provider'],
-		},
 		description: {
 			type: String,
 			required: [true, 'Please provide product description'],
@@ -22,6 +18,10 @@ const ProductSchema = mongoose.Schema(
 		imageUrl: {
 			type: String,
 			required: true,
+		},
+		price: {
+			type: Number,
+			required: [true, 'product price must be provider'],
 		},
 		rating: {
 			rate: { type: Number, default: 0 },
