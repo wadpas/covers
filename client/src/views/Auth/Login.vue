@@ -84,7 +84,9 @@
 <script setup>
 	import { ref } from 'vue'
 	import { useRouter } from 'vue-router'
+	import { useAuthStore } from '@/stores/authStore'
 	const router = useRouter()
+	const store = useAuthStore()
 
 	const formData = {
 		email: '',
@@ -93,7 +95,7 @@
 
 	async function onSubmit() {
 		try {
-			console.log(formData)
+			await store.loginUser(formData)
 			router.push('/')
 		} catch (error) {
 			console.log(error)

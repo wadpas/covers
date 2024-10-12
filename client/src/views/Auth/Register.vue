@@ -97,7 +97,9 @@
 
 <script setup>
 	import { useRouter } from 'vue-router'
+	import { useAuthStore } from '@/stores/authStore'
 	const router = useRouter()
+	const store = useAuthStore()
 
 	const formData = {
 		username: '',
@@ -107,7 +109,7 @@
 
 	async function onSubmit() {
 		try {
-			console.log(formData)
+			await store.registerUser(formData)
 			router.push('/')
 		} catch (error) {
 			console.log(error)
