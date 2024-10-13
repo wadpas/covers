@@ -4,7 +4,6 @@ import axios from '../plugins/axios'
 export const useAuthStore = defineStore('AuthStore', {
 	state: () => ({
 		user: null,
-		token: null,
 	}),
 
 	actions: {
@@ -12,6 +11,7 @@ export const useAuthStore = defineStore('AuthStore', {
 			try {
 				const { data } = await axios.post('/auth/register', payload)
 				this.user = data.user
+				localStorage.setItem('token', JSON.stringify(data.token))
 			} catch (error) {
 				throw error
 			}
@@ -21,6 +21,7 @@ export const useAuthStore = defineStore('AuthStore', {
 			try {
 				const { data } = await axios.post('/auth/login', payload)
 				this.user = data.user
+				localStorage.setItem('token', JSON.stringify(data.token))
 			} catch (error) {
 				throw error
 			}
