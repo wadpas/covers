@@ -40,7 +40,7 @@
 			<button
 				type="button"
 				class="btn btn-dark"
-				@click="onSubmit">
+				@click="onLogin">
 				Submit
 			</button>
 			<p class="my-3 text-center">
@@ -67,7 +67,7 @@
 		password: '',
 	}
 
-	async function onSubmit() {
+	async function onLogin() {
 		try {
 			await store.loginUser(formData)
 			router.push({ name: 'home' })

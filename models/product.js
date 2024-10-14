@@ -12,8 +12,9 @@ const ProductSchema = mongoose.Schema(
 			maxlength: [1000, 'Description cannot be more than 1000 characters'],
 		},
 		category: {
-			type: String,
-			required: true,
+			type: mongoose.Types.ObjectId,
+			ref: 'Category',
+			required: [true, 'Please provide product category'],
 		},
 		imageUrl: {
 			type: String,

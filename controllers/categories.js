@@ -56,10 +56,16 @@ const deleteCategory = async (req, res) => {
 	res.status(StatusCodes.OK).send({ message: 'Delete is successful!' })
 }
 
+const addCategories = async (req, res) => {
+	const categories = await Category.insertMany(req.body)
+	res.status(StatusCodes.CREATED).json({ categories })
+}
+
 module.exports = {
 	getAllCategories,
 	createCategory,
 	getCategory,
 	updateCategory,
 	deleteCategory,
+	addCategories,
 }

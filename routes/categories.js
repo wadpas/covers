@@ -6,9 +6,10 @@ const {
 	getCategory,
 	updateCategory,
 	deleteCategory,
+	addCategories,
 } = require('../controllers/categories')
 
-router.route('/').get(getAllCategories).post(createCategory)
+router.route('/').get(getAllCategories).post(createCategory).put(addCategories)
 router.route('/:id').get(getCategory).patch(updateCategory).delete(deleteCategory)
 
 module.exports = router

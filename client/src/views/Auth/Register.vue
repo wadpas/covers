@@ -10,7 +10,7 @@
 				</label>
 				<input
 					v-model="formData.username"
-					type="username"
+					type="text"
 					class="form-control"
 					id="username" />
 			</div>
@@ -51,7 +51,8 @@
 			</div>
 			<button
 				type="submit"
-				class="btn btn-dark">
+				class="btn btn-dark"
+				@click="onRegister">
 				Submit
 			</button>
 			<p class="my-3 text-center">
@@ -78,7 +79,7 @@
 		password: '',
 	}
 
-	async function onSubmit() {
+	async function onRegister() {
 		try {
 			await store.registerUser(formData)
 			router.push('/')
