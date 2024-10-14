@@ -31,7 +31,9 @@
 							Home
 						</router-link>
 					</li>
-					<li class="nav-item">
+					<li
+						v-if="isAuth.value"
+						class="nav-item">
 						<router-link
 							class="nav-link active"
 							aria-current="page"
@@ -49,16 +51,31 @@
 						placeholder="Search"
 						aria-label="Search" />
 				</form>
-				<router-link :to="{ name: 'auth-login' }">
-					<button
-						class="btn btn-outline-secondary"
-						type="submit">
-						Login
-					</button>
-				</router-link>
+				<button
+					class="btn btn-outline-secondary"
+					type="button"
+					@click="handleAuth">
+					{{ isAuth.value ? 'Logout' : 'Login' }}
+				</button>
 			</div>
 		</div>
 	</nav>
 </template>
 
-<script setup></script>
+<script setup>
+	import { storeToRefs } from 'pinia'
+	import { useRouter } from 'vue-router'
+	import { useAuthStore } from '@/stores/authStore'
+	const authStore = useAuthStore()
+	const router = useRouter()
+
+	const { isAuth } = storeToRefs(authStore)
+
+	async function handleAuth() {
+		if (isAuth.value) {
+			await authStore.logoutUser()
+			router.push({ name: 'home' })
+		}
+		router.push({ name: 'auth-login' })
+	}
+</script>

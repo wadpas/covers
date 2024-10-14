@@ -46,15 +46,14 @@
 			</div>
 			<div class="mb-2">
 				<label
-					for="imageUrl"
+					for="image"
 					class="form-label">
 					Image
 				</label>
 				<input
-					v-model="formData.imageUrl"
-					type="text"
+					type="file"
 					class="form-control"
-					id="imageUrl" />
+					@change="handleSelectedFiles($event)" />
 			</div>
 			<div class="mb-2">
 				<label
@@ -85,18 +84,23 @@
 	const router = useRouter()
 	const productStore = useProductsStore()
 
+	function handleSelectedFiles(e) {
+		this.formData.image = e.target.files[0]
+		console.log(e.target.files[0])
+	}
+
 	const formData = {
 		name: '',
 		description: '',
 		category: '',
-		imageUrl: '',
+		image: null,
 		price: null,
 	}
 
 	async function onCreateProduct() {
 		try {
 			await productStore.createProduct(formData)
-			router.push('/')
+			// router.push('/')
 		} catch (error) {
 			console.log(error)
 		}

@@ -5,6 +5,8 @@ const fs = require('fs')
 const { BadRequestError, NotFoundError } = require('../errors')
 
 const uploadProductImage = async (req, res) => {
+	console.log(req.files)
+
 	if (!req.files) {
 		throw new BadRequestError('No File Uploaded')
 	}
@@ -27,7 +29,7 @@ cloudinaryProductImage = async (req, res) => {
 		folder: 'file-upload',
 	})
 	fs.unlinkSync(req.files.image.tempFilePath)
-	res.status(StatusCodes.OK).json({ image: { src: result.secure_url } })
+	res.status(StatusCodes.OK).json({ imageUrl: result.secure_url })
 }
 
 module.exports = {

@@ -56,11 +56,13 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue'
+	import { storeToRefs } from 'pinia'
 	import { useRouter } from 'vue-router'
 	import { useAuthStore } from '@/stores/authStore'
 	const router = useRouter()
-	const store = useAuthStore()
+	const authStore = useAuthStore()
+
+	const { isAuth } = storeToRefs(authStore)
 
 	const formData = {
 		email: '',
@@ -69,8 +71,8 @@
 
 	async function onLogin() {
 		try {
-			await store.loginUser(formData)
-			router.push({ name: 'home' })
+			await authStore.loginUser(formData)
+			if (isAuth) router.push({ name: 'home' })
 		} catch (error) {
 			console.log(error)
 		}

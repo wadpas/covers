@@ -44,4 +44,9 @@ const updateUser = async (req, res) => {
 	res.status(StatusCodes.OK).json({ user, token })
 }
 
-module.exports = { register, login, updateUser }
+const checkUser = async (req, res) => {
+	const user = await User.findOne({ _id: req.user.userId })
+	res.status(StatusCodes.OK).json({ user })
+}
+
+module.exports = { register, login, checkUser, updateUser }
