@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use(
 		} else {
 			const { token } = storeToRefs(useAuthStore())
 			token.value = localToken
-			config.headers.Authorization = `Bearer ${token}`
+			config.headers.authorization = `Bearer ${token.value}`
 		}
 		return config
 	},

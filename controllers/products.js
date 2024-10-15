@@ -2,14 +2,16 @@ const { StatusCodes } = require('http-status-codes')
 const Product = require('../models/Product')
 
 const getAllProducts = async (req, res) => {
-	const { featured, company, name, sort, fields, numericFilters } = req.query
+	console.log(req.query)
+
+	const { featured, category, name, sort, fields, numericFilters } = req.query
 	const queryObject = {}
 
 	if (featured) {
 		queryObject.featured = featured === 'true' ? true : false
 	}
-	if (company) {
-		queryObject.company = company
+	if (category) {
+		queryObject.category = category
 	}
 	if (name) {
 		queryObject.name = { $regex: name, $options: 'i' }

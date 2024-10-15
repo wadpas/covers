@@ -5,8 +5,6 @@ const fs = require('fs')
 const { BadRequestError, NotFoundError } = require('../errors')
 
 const uploadProductImage = async (req, res) => {
-	console.log(req.files)
-
 	if (!req.files) {
 		throw new BadRequestError('No File Uploaded')
 	}
@@ -20,7 +18,7 @@ const uploadProductImage = async (req, res) => {
 	}
 	const imagePath = path.join(__dirname, '../public/uploads/' + `${productImage.name}`)
 	await productImage.mv(imagePath)
-	res.status(StatusCodes.OK).json({ image: { src: `/uploads/${productImage.name}` } })
+	res.status(StatusCodes.OK).json({ imageUrl: `../uploads/${productImage.name}` })
 }
 
 cloudinaryProductImage = async (req, res) => {
