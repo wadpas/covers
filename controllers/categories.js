@@ -7,15 +7,9 @@ const getAllCategories = async (req, res) => {
 	res.status(StatusCodes.OK).json({ categories, pagination: {} })
 }
 
-const getCategory = async (req, res, next) => {
-	const {
-		user: { userId },
-		params: { id: categoryId },
-	} = req
-	const category = await Category.findById({ _id: categoryId, createdBy: userId })
-	if (!category) {
-		throw new NotFoundError(`No category with id ${categoryId}`)
-	}
+const getCategory = async (req, res) => {
+	const categoryId = req.params.id
+	const category = await Category.findById({ _id: categoryId })
 	res.status(StatusCodes.OK).json({ category })
 }
 

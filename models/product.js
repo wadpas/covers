@@ -11,7 +11,7 @@ const ProductSchema = mongoose.Schema(
 			required: [true, 'Please provide product description'],
 			maxlength: [1000, 'Description cannot be more than 1000 characters'],
 		},
-		category: {
+		categoryId: {
 			type: mongoose.Types.ObjectId,
 			ref: 'Category',
 			required: [true, 'Please provide product category'],
