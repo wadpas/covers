@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '@/views/Auth/Login.vue'
-import Register from '@/views/Auth/Register.vue'
 import AddProduct from '@/views/AddProduct.vue'
 import Categories from '@/views/Categories.vue'
 import Products from '../views/Products.vue'
