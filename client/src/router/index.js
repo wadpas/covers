@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AddProduct from '@/views/AddProduct.vue'
-import Categories from '@/views/Categories.vue'
-import Products from '../views/Products.vue'
+import Movies from '../views/Movies.vue'
+import NotFound from '../views/NotFound.vue'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,29 +8,12 @@ const router = createRouter({
 		{
 			path: '/',
 			name: 'home',
-			component: Categories,
-		},
-
-		{
-			path: '/products/add',
-			name: 'add-product',
-			component: AddProduct,
+			component: Movies,
 		},
 		{
-			path: '/auth/login',
-			name: 'auth-login',
-			component: Login,
-		},
-		{
-			path: '/auth/register',
-			name: 'auth-register',
-			component: Register,
-		},
-		{
-			path: '/:categoryId',
-			name: 'products',
-			component: Products,
-			props: true,
+			path: '/:pathMatch(.*)*',
+			name: 'not-found',
+			component: NotFound,
 		},
 	],
 })
