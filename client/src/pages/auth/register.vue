@@ -58,7 +58,7 @@
 			<p class="my-3 text-center">
 				Already have account?
 				<router-link
-					:to="{ name: 'auth-login' }"
+					:to="{ name: '/' }"
 					class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
 					Login now
 				</router-link>
