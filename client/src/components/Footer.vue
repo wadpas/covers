@@ -44,20 +44,4 @@
 	</footer>
 </template>
 
-<script setup>
-	import { storeToRefs } from 'pinia'
-	import { useRouter } from 'vue-router'
-	import { useAuthStore } from '@/stores/auth'
-	const authStore = useAuthStore()
-	const router = useRouter()
-
-	const { isAuth } = storeToRefs(authStore)
-
-	async function handleAuth() {
-		if (isAuth.value) {
-			await authStore.logoutUser()
-			router.push({ name: 'home' })
-		}
-		router.push({ name: 'auth-login' })
-	}
-</script>
+<script setup lang="ts"></script>

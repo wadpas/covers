@@ -5,7 +5,7 @@ import axios from '../plugins/axios'
 export const useMoviesStore = defineStore('ProductsStore', () => {
 	const movies = ref([])
 
-	async function getMovies(query) {
+	async function getMovies(query: Object) {
 		try {
 			const { data } = await axios.get('/movies', {
 				params: query,

@@ -1,10 +1,8 @@
 <template>
-	<div v-for="movie in movies">{{ movie.title }} - {{ Object.keys(movie).length }}</div>
-	{{ movies }}
+	<div v-for="movie in movies">{{ movie }} - {{ Object.keys(movie).length }}</div>
 </template>
 
-<script setup>
-	import { toRefs, defineProps } from 'vue'
+<script setup lang="ts">
 	import { onMounted } from 'vue'
 	import { storeToRefs } from 'pinia'
 	import { useMoviesStore } from '@/stores/movies'
@@ -13,6 +11,6 @@
 	const { movies } = storeToRefs(moviesStore)
 
 	onMounted(async () => {
-		await moviesStore.getMovies()
+		await moviesStore.getMovies({})
 	})
 </script>
